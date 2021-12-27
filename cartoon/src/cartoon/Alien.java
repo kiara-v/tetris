@@ -76,6 +76,7 @@ public class Alien {
 
             if (_colorTimeline.getStatus() == Animation.Status.RUNNING) {
                 _colorTimeline.pause();
+                _beam.setFill(Color.YELLOW);
             } else {
                 _colorTimeline.play();
                 event.consume();
