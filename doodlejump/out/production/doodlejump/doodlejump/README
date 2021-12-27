@@ -1,0 +1,42 @@
+doodlejump README
+
+OVERVIEW:
+    My doodlejump has 6 public classes (App, PaneOrganizer, Game, Doodle, Platform, and Constants) and 3 private classes
+    (KeyHandler, TimeHandler, and QuitHandler).
+    - App launches a new PaneOrganizer
+    - PaneOrganizer sets up a BorderPane as the root, a pane for the Doodle class and Platform class, a label,
+    a quit button, and creates a new Game.
+    - Doodle creates the doodle rectangle and Platform creates a platform rectangle.
+    - Game creates a new Doodle and sets up the timeline for the animation of the doodle falling and bouncing.
+    The doodle also has a KeyHandler that moves the doodle left when the left arrow key is pressed and right when the
+    right arrow key is pressed. Semi-randomized platforms are generated based on the location of the previous
+    platform. Platforms below the app's bottom are removed. There's also a scroll effect where the doodle stays
+    at the center of the screen and the platforms move down.
+    - When the doodle hits the ground, the timeline stops, the event handler is removed from the doodle, the game pane
+    loses opacity, and the label, "GAME OVER!" appears.
+
+DESIGN CHOICES:
+    - I used EventHandlers for the quit button, the timeline, and the doodle. QuitHandler exits the app when the quit
+    button is pressed. TimeHandler moves the doodle up or down based on gravity and rebound velocity. It also
+    continuously generates platforms.KeyHandler moves the doodle left when the left arrow key is pressed and right when
+    the right arrow key is pressed.
+    - I used a timeline to update the doodle's velocity based on if the doodle is falling or it hits a platform.
+    It also scrolls the screen based on the doodle's y-coordinate so it never goes off screen.
+    - I used an arraylist to store the platforms. Storing the platforms helps keep track of every platform's location,
+    which helps when removing the platforms that go past the screen.
+    - I used setter and getter methods to get and set the locations of the doodle and platform in the Game class.
+    I also used a getter method to get the shapes that the Doodle class and Platform class makes so that the
+    intersects() method can be called on the shapes.
+    - I also added in parameters within the Cartoon class so that the class knows about the panes and the label/button
+    instantiated in PaneOrganizer. The logic for the EventHandlers for the label/button are contained within the
+    Cartoon class so it must know about these elements. Alien and Cow also have parameters that take in a pane. This is
+    so when Alien and Cow are instantiated, they know which pane to add their graphical elements to.
+    - I used for and while loops. I used a for-each loop to test if the doodle hits any of the platforms and to bounce
+    of each one if the doodle does. This is so that the doodle bounces on every platform instead of just one. I used a
+    while loop to continuously generate semi-randomized platforms if the latest platform generated is on screen. This is
+    so that platforms are not generated for a certain amount, but as long as the game goes on. I used a for loop
+    (not a for-each loop) to remove a platform from the arraylist and the game pane if the platform moves past the
+    screen. This is so every platform in the arraylist is checked to see if they are out of bounds.
+    - I added my elements graphically and logically. I created a doodle and platforms and added it graphically by
+    adding it onto a pane on the root. When deleting the platforms, I had to delete it from the arraylist and
+    delete it from the pane.
