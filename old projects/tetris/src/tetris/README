@@ -1,0 +1,43 @@
+README tetris
+
+OVERVIEW:
+    My tetris has 6 public classes (App, PaneOrganizer, Game, Piece, Square, and Constants) and 3 private classes
+    (KeyHandler, TimeHandler, and QuitHandler).
+    - App launches a new PaneOrganizer
+    - PaneOrganizer sets up a BorderPane as the root, a pane for the Game class, a label, a quit button, and creates
+    a new Game.
+    - Game creates a 2D board array with a border filled with squares so that pieces stay within the board and also
+    generates a new piece.
+    - Piece creates a new piece composed of four squares in a semi-randomized configuration.
+    - The timeline is set up so that in the TimeHandler, if a piece falls as much as it can and can not move anymore,
+    it is added to the board and a new piece is generated at the top. Otherwise, the piece continues to fall one
+    index of the board array at a time.
+    - The TimeHandler also checks to clear full rows and move the rows above down as much as they can. It also checks
+    for game over when the last generated piece can not move anymore or there is a square occupying the top row.
+    - The latest piece generated also has a KeyHandler that moves the piece left when the left arrow key is pressed,
+    right when the right arrow key is pressed, down when the down arrow key is pressed, rotates the piece
+    counterclockwise when the up arrow key is pressed, pauses the game when p is pressed, and makes the piece fall
+    when the spacebar is pressed.
+
+
+DESIGN CHOICES:
+    - I used arrays to create a piece with four squares and a 2D board. The piece array kept four squares and I used an
+    static array to input coordinates for each of the four squares. The 2D board array keeps track of squares in row
+    major order, with the border filled with squares and the inside null.
+    - I used a factory pattern to generate a random piece from 7 piece designs. Each case holds the coordinates and color
+    for different pieces. This is so each piece has its own configuration for four squares and its own color. It also
+    means I can generate a random piece each time. It also changes a boolean based on if the piece is allowed to rotate.
+    This is so that the o shaped piece can't rotate since it doesn't change shape when it rotates.
+    - I used a timeline to animate the piece falling, generate a new piece after the last piece generated can no
+    longer move, to check for game over, and to always delete full lines.
+    - I used getter and setter methods to help: get and set the locations of the squares of the pieces in the Piece class;
+    get and set the locations of all the piece's squares in the Game class; set the color of the squares in the Piece
+    class; return an individual square of a piece in the Piece class; and return all the squares in a piece.
+    - I also added parameters within the Game and Piece classes. The Game class takes in the board pane and the label
+    instantiated in PaneOrganizer. This is so the label can change at different parts of the game and so that the board
+    and piece can appear graphically on screen when added to the pane. The Piece class takes in the board array so that
+    I could make a method to add the pieces to the board in the Piece class.
+    - I added my elements graphically and logically. I created a piece and added it graphically by
+    adding it onto a pane on the root. When it can no longer move, I add it logically to the board array. When a row is
+    full, I delete the squares of the row graphically and make their places in the board array null so that the rows
+    above can move down a row graphically, and logically by taking their place in the board array.
