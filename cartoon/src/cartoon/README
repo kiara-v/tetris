@@ -1,0 +1,33 @@
+README cartoon
+
+OVERVIEW: ***WARNING*** clicking sicko mode makes the beam change color rapidly (strobe light effect)
+    My cartoon has 6 public classes (App, PaneOrganizer, Cartoon, Alien, Cow, Constants) and 5 private classes
+    (ClickHandler, ColorHandler, LocationHandler, PressHandler, QuitHandler).
+    - App launches a new PaneOrganizer
+    - PaneOrganizer sets up a BorderPane as the root, a pane for the Alien class and Cow class, a button,
+    a label, a quit button (pressing Q will also exit the program), and creates an instance of Cartoon.
+    - Cartoon creates a new Alien and Cow and sets up the timeline for the animation of the alien moving right.
+    - The status label changes, depending on if the cow and alien are aligned or not. It also counts how many times
+    the cow was caught.
+    - Alien creates an alien graphic.
+    - When the sicko mode button is pressed, the beam is animated to change colors randomly and rapidly.
+    - Cow creates a cow graphic.
+    - Pressing different keys moves the cow horizontally.
+
+DESIGN CHOICES:
+    - I used EventHandlers for the quit button, the sicko mode button, on the cow pane, and the composite alien shape.
+    When the quit button is pressed, the game exits. When the sicko mode button is pressed, random colors are generated
+    and a new timeline is instantiated to animate the colors changing rapidly. Pressing the left key will move the cow left.
+    Pressing the right key will move the cow right. Pressing the up key will return the cow to the center. Pressing the escape key
+    will exit the program. A new timeline is instantiated that creates a new LocationHandler, which moves the
+    composite alien shape horizontally each time the timeline replays.
+    - I used a helper method to return a new string for the label at the bottom and update it based on the cow and
+    alien's location. I also used a helper method to get the root node from the PaneOrganizer and put it in the parameters
+    of my scene. I also used a helper method to return the cow's current center x position, even after it's been moved by pressing
+    the keys. In the same way, I used a helper method to return the alien's current center x position so that I could
+    code to update the label if these two aligned vertically.
+    - I created a new pane for each composite shape (the alien and cow) in order to simplify moving each composite shape.
+    - I also added in parameters within the Cartoon class so that the class knows about the panes and the label/button
+    instantiated in PaneOrganizer. The logic for the EventHandlers for the label/button are contained within the
+    Cartoon class so it must know about these elements. Alien and Cow also have parameters that take in a pane. This is
+    so when Alien and Cow are instantiated, they know which pane to add their graphical elements to.
