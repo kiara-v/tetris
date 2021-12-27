@@ -37,6 +37,12 @@ public class Calculator {
     private CircleButton _sqrtB;
     private CircleButton _cB;
 
+    private CircleButton _cosB;
+    private CircleButton _sinB;
+    private CircleButton _tanB;
+//    private CircleButton _exponentB;
+    private CircleButton _logB;
+
     private Boolean _addBool = false;
     private Boolean _subBool = false;
     private Boolean _divBool = false;
@@ -115,6 +121,11 @@ public class Calculator {
         _equalB = new CircleButton(pane, "=", 2, 4);
         _sqrtB = new CircleButton(pane, "√", 1, 0);
 
+        _cosB = new CircleButton(pane, "cos", 0, 5);
+        _sinB = new CircleButton(pane, "sin", 1, 5);
+        _tanB = new CircleButton(pane, "tan", 2, 5);
+        _logB = new CircleButton(pane, "log", 3, 5);
+
         _n1.setOnAction(new ListenToOne());
         _n2.setOnAction(new ListenToTwo());
         _n3.setOnAction(new ListenToThree());
@@ -134,6 +145,11 @@ public class Calculator {
         _cB.setOnAction(new ListenToClear());
         _sqrtB.setOnAction(new ListenToSqrt());
         _decimalB.setOnAction(new ListenToDecimal());
+
+        _cosB.setOnAction(new ListenToCos());
+        _sinB.setOnAction(new ListenToSin());
+        _tanB.setOnAction(new ListenToTan());
+        _logB.setOnAction(new ListenToLog());
     }
 
     class ListenToClear implements EventHandler<ActionEvent> {
@@ -328,6 +344,42 @@ public class Calculator {
         public void handle(ActionEvent event) {
             display = _result.getText();
             _result.setText(display + ".");
+        }
+    }
+
+    private class ListenToCos implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            TEMP = Double.parseDouble(_result.getText());
+            SolveTEMP = Math.cos(TEMP);
+            _result.setText(Double.toString(SolveTEMP));
+        }
+    }
+
+    private class ListenToSin implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            TEMP = Double.parseDouble(_result.getText());
+            SolveTEMP = Math.sin(TEMP);
+            _result.setText(Double.toString(SolveTEMP));
+        }
+    }
+
+    private class ListenToTan implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            TEMP = Double.parseDouble(_result.getText());
+            SolveTEMP = Math.tan(TEMP);
+            _result.setText(Double.toString(SolveTEMP));
+        }
+    }
+
+    private class ListenToLog implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            TEMP = Double.parseDouble(_result.getText());
+            SolveTEMP = Math.log(TEMP);
+            _result.setText(Double.toString(SolveTEMP));
         }
     }
 }
